@@ -1,0 +1,5 @@
+---
+# vars file for roles/jenkins
+username: admin1
+password: admin1
+url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key

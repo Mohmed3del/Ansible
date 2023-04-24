@@ -1,0 +1,86 @@
+- name: Installing Mysql  and dependencies
+  package:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  loop:
+    - mysql-server
+    # - mysql-client
+    - python3-mysqldb
+    # - libmysqlclient-dev
+  register: mysql_Install
+
+# - name: Open firewall ports for mysql
+#   ufw:
+#     rule: allow
+#     port: "{{ item }}"
+#     comment: "Allow SonarQube traffic"
+#     state: enabled
+#   loop:
+#     - 3306
+#     - mysql
+
+- name: start and enable mysql service
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+
+- name: Set MySQL root password
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    login_user: root
+    login_password: ""
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    check_implicit_admin: yes
+  when: mysql_Install.changed
+
+- name: Configure MySQL server settings
+  template:
+    src: my.cnf.j2
+    dest: /etc/mysql/my.cnf
+  notify:
+    - Restart MySQL Service
+
+- name: creating mysql user
+  ansible.builtin.mysql_user:
+    name: "{{ sonarqube_user }}"
+    password: "{{ sonarqube_password }}"
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    priv: "*.*:ALL"
+    host: "%"
+    state: present
+
+- name: creating database
+  ansible.builtin.mysql_db:
+    name: "{{ sonarqube_database }}"
+    state: present
+    encoding: utf8
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+
+# - name: Enable remote login to mysql
+#   lineinfile:
+#     path: /etc/mysql/mysql.conf.d/mysqld.cnf
+#     regexp: "^bind-address"
+#     line: "bind-address = 0.0.0.0"
+#     backup: yes
+#   notify:
+#     - Restart MySQL Service
+
+- name: Delete .my.cnf file
+  file:
+    path: /root/.my.cnf
+    state: absent
+#     encoding: utf8mb4
+#     collation: utf8mb4_general_ci
+
+- name: Grant all privileges on the user database
+  mysql_user:
+    name: "{{ sonarqube_user }}"
+    password: "{{ sonarqube_password }}"
+    priv: "{{ sonarqube_database }}.*:ALL"
+    login_user: root
+    login_password: "{{ mysql_root_password }}"

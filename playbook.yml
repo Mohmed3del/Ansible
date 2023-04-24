@@ -1,0 +1,37 @@
+---
+- name: Install Postgresql on Ubuntu
+  hosts: postgres
+  become: true
+  gather_facts: no
+  roles:
+    - postgresql
+
+- name: Install and configure SonarQube
+  hosts: sonar
+  become: true
+  gather_facts: no
+  roles:
+    - sonar
+
+- name: Install and configure Nexus
+  hosts: nexus
+  become: true
+  gather_facts: no
+  roles:
+    - nexus
+
+- name: Install  and configure Jenkins
+  hosts: jenkins
+  gather_facts: false
+  roles:
+    - jenkins
+
+  # tasks:
+  #   - name: install pre_tasks
+  #     ansible.builtin.apt:
+  #       name: net-tools
+  #       state: latest
+
+  # - name: Display machine IP address
+  #   debug:
+  #     msg: "IP address of {{ inventory_hostname }} is {{ ansible_default_ipv4.address }}"

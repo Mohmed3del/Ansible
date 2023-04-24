@@ -1,0 +1,11 @@
+---
+- name: Restart Jenkins
+  systemd:
+    name: jenkins
+    state: restarted
+
+- name: Display Jenkins initial admin password
+  debug:
+    msg: "{{ jenkins_password['content'] | b64decode }}"
+  tags:
+    - print1

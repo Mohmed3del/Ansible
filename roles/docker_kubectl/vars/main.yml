@@ -1,0 +1,6 @@
+---
+# vars file for roles/docker_kubectl
+users:
+  - ubuntu
+  - jenkins
+  - adel

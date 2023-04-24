@@ -1,0 +1,48 @@
+---
+# tasks file for roles/jenkins
+- name: Add Jenkins GPG key
+  ansible.builtin.get_url:
+    url: "{{ url }}"
+    validate_certs: no
+    dest: /usr/share/keyrings/jenkins-keyring.asc
+
+- name: Add Jenkins repository
+  apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/"
+    state: present
+
+- name: Install Java
+  apt:
+    name: openjdk-11-jdk
+    state: present
+
+- name: Install Jenkins
+  apt:
+    name: jenkins
+    state: present
+  notify:
+    - Restart Jenkins
+    - Display Jenkins initial admin password
+
+- name: daemon-reload
+  systemd:
+    daemon_reload: true
+
+- name: Start and enable Jenkins service
+  systemd:
+    name: jenkins
+    state: started
+    enabled: yes
+
+- name: Download Jenkins CLI jar
+  get_url:
+    url: http://localhost:8080/jnlpJars/jenkins-cli.jar
+    dest: /home/ubuntu
+  register: cli_installed
+
+- name: Get Jenkins initial admin password
+  slurp:
+    src: /var/lib/jenkins/secrets/initialAdminPassword
+  register: jenkins_password
+  tags:
+    - print1
