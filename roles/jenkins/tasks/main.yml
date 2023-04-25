@@ -28,6 +28,15 @@
   systemd:
     daemon_reload: true
 
+# to change jenkins port
+- name: change jenkins port
+  lineinfile:
+    path: /lib/systemd/system/jenkins.service
+    regexp: '^Environment="JENKINS_PORT=8080"'
+    line: 'Environment="JENKINS_PORT=8090"'
+  notify:
+    - Restart Jenkins
+
 - name: Start and enable Jenkins service
   systemd:
     name: jenkins
