@@ -4,7 +4,38 @@ This repository contains a collection of Ansible playbooks that can be used to c
 
 ## Usage
 
-To use these playbooks, you'll need to have Ansible installed on your local machine. Once Ansible is installed, you can run the playbooks using the `ansible-playbook` command.
+To use these playbooks, you'll need to have Ansible installed on your local machine. There are different ways to install Ansible:
+
+### Installing Ansible using the system package manager
+
+You can use the system package manager to install Ansible. For example, in Ubuntu, you can install Ansible using the following command:
+
+```
+sudo apt-get update
+sudo apt-get install ansible
+ansible --version
+```
+
+### Installing Ansible using the system package manager
+
+You can use the system package manager to install Ansible. Here are the instructions for installing Ansible on RHEL:
+
+```
+sudo yum install epel-release
+sudo yum install ansible
+ansible --version
+```
+
+### Installing Ansible using pip
+
+You can install Ansible using pip, the Python package manager. First, you need to install pip if it's not already installed. You can do that using the following command:
+
+```
+sudo apt-get update
+sudo apt-get install python3-pip
+sudo pip3 install ansible
+ansible --version
+```
 
 ## Roles
 
