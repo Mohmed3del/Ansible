@@ -69,10 +69,8 @@ Replace `<your_ip>` with the IP address or hostname of your server, `myuser` wit
 
 You can add or modify the following options to specify private key:
 
-```
-private_key_file = path_to_private_key
-vault_password_file= path_to_vault_password
-```
+`private_key_file = path_to_private_key`
+`vault_password_file = path_to_vault_password`
 
 Make sure to replace `path_to_vault_password` with the path to your vault password file and `path_to_private_key` with the path to your private key file.
 
