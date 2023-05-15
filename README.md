@@ -59,7 +59,7 @@ Change into the cloned repository directory:
 
 ### Adding IP addresses and private keys to the inventory file
 
-Before you can run the playbook, you need to add the IP addresses or hostnames of the servers you want to configure to the inventory file located at `inventory/hosts.ini`. You also need to specify the private key used to access the servers. Here's an example of how to add a server to the inventory file:
+Before you can run the playbook, you need to add the IP addresses or hostnames of the servers you want to configure to the inventory file located at `inventory`. You also need to specify the private key used to access the servers. Here's an example of how to add a server to the inventory file:
 
 `ansible_host=<your_ip> `
 
@@ -70,7 +70,7 @@ Replace `<your_ip>` with the IP address or hostname of your server, `myuser` wit
 You can add or modify the following options to specify private key:
 
 ````private_key_file = path_to_private_key
-vault_password_file= path_to_vault_password ```
+vault_password_file= path_to_vault_password```
 
 Make sure to replace `path_to_vault_password` with the path to your vault password file and `path_to_private_key` with the path to your private key file.
 
@@ -127,4 +127,8 @@ The `kubectl` role contains tasks that install kubectl and configure it to work 
 ## Contributing
 
 If you'd like to contribute to this repository, feel free to submit a pull request or open an issue. Contributions are always welcome!
+```
+
+```
+
 ```
