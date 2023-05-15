@@ -2,6 +2,15 @@
 
 This repository contains a collection of Ansible playbooks that can be used to configure servers for different purposes. The playbooks are organized by role, with each role representing a specific aspect of server configuration.
 
+## Requirements
+
+To use these playbooks, you'll need to have the following software installed on your local machine:
+
+- Ansible
+- Git
+
+You'll also need to have SSH access to the server that you want to configure.
+
 ## Usage
 
 To use these playbooks, you'll need to have Ansible installed on your local machine. There are different ways to install Ansible:
