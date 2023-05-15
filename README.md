@@ -6,7 +6,7 @@ This repository contains a collection of Ansible playbooks that can be used to c
 
 To use these playbooks, you'll need to have Ansible installed on your local machine. There are different ways to install Ansible:
 
-### Installing Ansible using the system package manager
+### Installing Ansible using apt package manager in Ubuntu
 
 You can use the system package manager to install Ansible. For example, in Ubuntu, you can install Ansible using the following command:
 
@@ -16,7 +16,7 @@ sudo apt-get install ansible
 ansible --version
 ```
 
-### Installing Ansible using the system package manager
+### Installing Ansible using yum package manager in RHEL
 
 You can use the system package manager to install Ansible. Here are the instructions for installing Ansible on RHEL:
 
