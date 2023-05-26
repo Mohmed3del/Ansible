@@ -28,15 +28,6 @@
   systemd:
     daemon_reload: true
 
-# to change jenkins port
-- name: change jenkins port
-  lineinfile:
-    path: /lib/systemd/system/jenkins.service
-    regexp: '^Environment="JENKINS_PORT=8080"'
-    line: 'Environment="JENKINS_PORT=8090"'
-  notify:
-    - Restart Jenkins
-
 - name: Start and enable Jenkins service
   systemd:
     name: jenkins
@@ -93,9 +84,22 @@
     dest: /home/ubuntu
   register: cli_installed
 
-- name: Get Jenkins initial admin password
-  slurp:
-    src: /var/lib/jenkins/secrets/initialAdminPassword
-  register: jenkins_password
-  tags:
-    - print1
+# to change jenkins port
+- name: change jenkins port
+  lineinfile:
+    path: /etc/default/jenkins
+    regexp: '^HTTP_PORT=8080"'
+    line: 'HTTP_PORT=8090"'
+  notify:
+    - Restart Jenkins
+# - name: Get Jenkins initial admin password
+#   slurp:
+#     src: /var/lib/jenkins/secrets/initialAdminPassword
+#   register: jenkins_password
+#   tags:
+#     - print1
+# - name: Display Jenkins initial admin password
+#   debug:
+#     msg: "{{ jenkins_password['content'] | b64decode }}"
+#   tags:
+#     - print1

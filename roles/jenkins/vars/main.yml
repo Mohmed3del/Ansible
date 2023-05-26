@@ -1,5 +1,27 @@
 ---
 # vars file for roles/jenkins
-username: admin1
-password: admin1
+username: admin
+password: admin
 url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+plugin:
+  - pipeline
+  - git
+  - credentials
+  - ssh
+  - email-ext
+  - junit
+  - ant
+  - maven
+  - sonar
+  - sonar-scanner
+  - slack
+  - nexus-artifact-uploader
+  - git-client
+  - git-server
+  - github
+  - github-api
+  - github-branch-source
+  - pipeline-graph-analysis
+  - pipeline-input-step
+  - ssh-credentials
+  - sshd
