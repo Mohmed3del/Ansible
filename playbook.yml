@@ -18,7 +18,7 @@
   become: true
   gather_facts: no
   roles:
-    - nexus
+- nexus
 
 - name: Install  and configure Jenkins
   hosts: jenkins
