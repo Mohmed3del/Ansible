@@ -88,8 +88,8 @@
 - name: change jenkins port
   lineinfile:
     path: /etc/default/jenkins
-    regexp: '^HTTP_PORT=8080"'
-    line: 'HTTP_PORT=8090"'
+    regexp: "^HTTP_PORT=8080"
+    line: "HTTP_PORT=8090"
   notify:
     - Restart Jenkins
 # - name: Get Jenkins initial admin password

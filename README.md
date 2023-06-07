@@ -133,6 +133,10 @@ The `docker` role contains tasks that install Docker and Docker Compose, and con
 
 The `kubectl` role contains tasks that install kubectl and configure it to work with a Kubernetes cluster. kubectl is a command-line tool for managing Kubernetes clusters. Kubernetes is an open-source container orchestration system that can be used to deploy, scale, and manage containerized applications.
 
+### Enabling TLS/SSL with Let's Encrypt
+
+Let's Encrypt is a free, automated, and open certificate authority that provides TLS/SSL certificates for website encryption. Enabling TLS/SSL with Let's Encrypt ensures that communications between your website and its users are secure and encrypted.
+
 ## Contributing
 
 If you'd like to contribute to this repository, feel free to submit a pull request or open an issue. Contributions are always welcome!

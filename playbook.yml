@@ -26,7 +26,13 @@
   roles:
     - jenkins
 
+- name: Enabling TLS/SSL with Let's Encrypt
+  hosts: all
+  gather_facts: false
+  roles:
+    - nginx_proxy
   # tasks:
+
   #   - name: install pre_tasks
   #     ansible.builtin.apt:
   #       name: net-tools

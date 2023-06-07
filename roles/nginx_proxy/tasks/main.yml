@@ -1,0 +1,39 @@
+---
+# tasks file for roles/nginx_proxy
+- name: Install requirements of ssl
+  apt:
+    name:
+      - nginx
+      - certbot
+      - python3-certbot-nginx
+
+# - name: Obtain SSL certificate using Certbot
+#   certbot:
+#     email: "{{ certbot_email }}"
+#     domains: "{{ domain_hostname }}"
+#     nginx: true
+#     register: certbot_result
+
+- name: Configure Nginx for Jenkins reverse proxy
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-available/{{ domain_hostname }}
+  notify:
+    - restart nginx
+
+- name: Enable Nginx site
+  file:
+    src: /etc/nginx/sites-available/{{ domain_hostname }}
+    dest: /etc/nginx/sites-enabled/{{ domain_hostname }}
+    state: link
+
+- name: check if we have generated a cert already
+  stat:
+    path: "/etc/letsencrypt/live/{{ domain_hostname }}*/fullchain.pem"
+  register: cert_stats
+
+- name: run certbot to generate the certificates
+  shell: "certbot certonly --standalone -d {{ domain_hostname }} --email {{ certbot_email }} --non-interactive --agree-tos"
+  when: cert_stats.stat.exists == False
+  notify:
+    - restart nginx
